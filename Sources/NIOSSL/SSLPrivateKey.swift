@@ -118,7 +118,7 @@ func globalBoringSSLPassphraseCallback(buf: UnsafeMutablePointer<CChar>?,
 public class NIOSSLPrivateKey {
     public let _ref: UnsafeMutableRawPointer /*<EVP_PKEY>*/
 
-    public var ref: UnsafeMutablePointer<EVP_PKEY> {
+    internal var ref: UnsafeMutablePointer<EVP_PKEY> {
         return self._ref.assumingMemoryBound(to: EVP_PKEY.self)
     }
 

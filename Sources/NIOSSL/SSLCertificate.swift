@@ -12,13 +12,13 @@
 //
 //===----------------------------------------------------------------------===//
 
-#if compiler(>=5.1)
-@_implementationOnly import CNIOBoringSSL
-@_implementationOnly import CNIOBoringSSLShims
-#else
+//#if compiler(>=5.1)
+//@_implementationOnly import CNIOBoringSSL
+//@_implementationOnly import CNIOBoringSSLShims
+//#else
 import CNIOBoringSSL
 import CNIOBoringSSLShims
-#endif
+//#endif
 import NIO
 #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 import struct Darwin.time_t
@@ -36,7 +36,7 @@ import struct Glibc.time_t
 /// to obtain an in-memory representation of a TLS certificate from a buffer of
 /// bytes or from a file path.
 public class NIOSSLCertificate {
-    internal let _ref: UnsafeMutableRawPointer/*<X509>*/
+    public let _ref: UnsafeMutableRawPointer/*<X509>*/
 
     internal var ref: UnsafeMutablePointer<X509> {
         return self._ref.assumingMemoryBound(to: X509.self)
@@ -57,7 +57,7 @@ public class NIOSSLCertificate {
         return Array(UnsafeBufferPointer(start: serialNumber.pointee.data, count: Int(serialNumber.pointee.length)))
     }
 
-    private init(withOwnedReference ref: UnsafeMutablePointer<X509>) {
+    public init(withOwnedReference ref: UnsafeMutablePointer<X509>) {
         self._ref = UnsafeMutableRawPointer(ref) // erasing the type for @_implementationOnly import CNIOBoringSSL
     }
 
